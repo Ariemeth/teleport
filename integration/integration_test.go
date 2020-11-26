@@ -1302,7 +1302,7 @@ func (s *IntSuite) TestTwoClustersTunnel(c *check.C) {
 			// make sure the direct dialer was used and not the proxy dialer
 			c.Assert(ps.Count(), check.Equals, 0, comment)
 
-			// if we got here, it means two sites are cross-connected. lets execute SSH commands
+			// if we got here, it means two sites are cross-connected. Let's execute SSH commands
 			sshPort := a.GetPortSSHInt()
 			cmd := []string{"echo", "hello world"}
 
