@@ -598,6 +598,11 @@ func ApplyDefaults(cfg *Config) {
 	var sc ssh.Config
 	sc.SetDefaults()
 
+	if cfg.Log == nil {
+		// TODO(dmitri): setup using the standard method (use lib/utils?)
+		cfg.Log = logrus.New()
+	}
+
 	// Remove insecure and (borderline insecure) cryptographic primitives from
 	// default configuration. These can still be added back in file configuration by
 	// users, but not supported by default by Teleport. See #1856 for more
@@ -612,7 +617,7 @@ func ApplyDefaults(cfg *Config) {
 	hostname, err := os.Hostname()
 	if err != nil {
 		hostname = "localhost"
-		log.Errorf("Failed to determine hostname: %v.", err)
+		cfg.Log.Errorf("Failed to determine hostname: %v.", err)
 	}
 
 	// Global defaults.
