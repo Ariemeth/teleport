@@ -119,7 +119,7 @@ func (s *IntSuite) SetUpSuite(c *check.C) {
 
 	// close & re-open stdin because 'go test' runs with os.stdin connected to /dev/null
 	stdin, err := os.Open("/dev/tty")
-	if err != nil {
+	if err == nil {
 		os.Stdin.Close()
 		os.Stdin = stdin
 	}
